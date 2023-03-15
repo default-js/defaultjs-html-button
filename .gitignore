@@ -1,3 +1,7 @@
+# temp folder
+target
+runtime
+
 # Logs
 logs
 *.log
@@ -102,3 +106,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+# eclipse
+.project
+.settings
+.project
+node_modules
