@@ -22,5 +22,5 @@ class HTMLDefaultjsAnchorElement extends componentBaseOf(HTMLAnchorElement){
     }
 };
 
-define(HTMLDefaultjsAnchorElement), {extends: "a"};
+define(HTMLDefaultjsAnchorElement, {extends: "a"});
 export default HTMLDefaultjsAnchorElement;

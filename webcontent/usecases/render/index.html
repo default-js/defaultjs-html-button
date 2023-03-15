@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>call-renderer</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    
+</head>
+<body>
+    <template id="template">${$event.timeStamp}</template>
+    <fieldset>
+        <legend>render</legend>
+        <div>
+            <a is="d-button" href="#" type="render" template="#template" selector="#target-1">link</a>
+            <button is="d-button" href="#" type="render" template="#template" selector="#target-1">button</button>
+            <div id="target-1"></div>
+        </div>
+    </fieldset>
+
+
+    <script src='main.js' type="module"></script>    
+</body>
+</html>
