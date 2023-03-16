@@ -1,7 +1,7 @@
 {
 	"name": "@default-js/defaultjs-html-button",
 	"buildname": "defaultjs-html-button",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "give your button a life",
 	"main": "./index.js",
 	"scripts": {

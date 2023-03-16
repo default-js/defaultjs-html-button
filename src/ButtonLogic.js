@@ -3,7 +3,9 @@ import { ExpressionResolver } from "@default-js/defaultjs-expression-language";
 import { Renderer, Template } from "@default-js/defaultjs-template-language";
 
 export const ATTR__TYPE = "type";
-export const ATTR__ACTION = "action";
+export const ATTR__CLASS_NAME = "class-name";
+export const ATTR__ATTRIBUTE_NAME = "attribute-name";
+export const ATTR__EVENT_NAME = "event-name";
 export const ATTR__DETAIL = "detail";
 export const ATTR__SELECTOR = "selector";
 export const ATTR__CONTEXT = "context";
@@ -45,22 +47,22 @@ const resolveText = async (text, context) => {
 };
 
 const TYPE = {
-	[TYPE__DELEGATE]: async ({ targets, action }, context) => {
-		action = await resolveText(action, context);
-		if (action) targets.trigger(action, context);
+	[TYPE__DELEGATE]: async ({ targets, eventname }, context) => {
+		eventname = await resolveText(eventname, context);
+		if (eventname) targets.trigger(eventname, context);
 	},
-	[TYPE__TOGGLE_CLASS]: async ({ targets, action }, context) => {
-		action = await resolveText(action, context);
-		if (action) targets.toggleClass(action);
+	[TYPE__TOGGLE_CLASS]: async ({ targets, classname }, context) => {
+		classname = await resolveText(classname, context);
+		if (classname) targets.toggleClass(classname);
 	},
-	[TYPE__TOGGLE_ATTRIBUTE]: async ({ targets, action }, context) => {
-		action = await resolveText(action, context);
-		if (action) {
+	[TYPE__TOGGLE_ATTRIBUTE]: async ({ targets, attributename }, context) => {
+		attributename = await resolveText(attributename, context);
+		if (attributename) {
 			if (targets instanceof HTMLElement) targets = [targets];
 
 			for (const target of targets) {
-				const value = target.attr(action);
-				target.attr(action, value == null ? "" : null);
+				const value = target.attr(attributename);
+				target.attr(attributename, value == null ? "" : null);
 			}
 		}
 	},
@@ -108,10 +110,6 @@ class ButtonLogic {
 		return this.attr(ATTR__TYPE);
 	}
 
-	get action() {
-		return this.attr(ATTR__ACTION);
-	}
-
 	get selector() {
 		return this.attr(ATTR__SELECTOR);
 	}
@@ -127,6 +125,18 @@ class ButtonLogic {
 			}
 		}
 		return this.#context;
+	}
+
+	get eventname(){
+		return this.attr(ATTR__EVENT_NAME);
+	}
+
+	get classname(){
+		return this.attr(ATTR__CLASS_NAME);
+	}
+
+	get attributename(){
+		return this.attr(ATTR__ATTRIBUTE_NAME);
 	}
 
 	get template() {
@@ -155,12 +165,17 @@ class ButtonLogic {
 	}
 
 	execute(event) {
-		const context = Object.assign({}, this.context);
-		context[VAR__EVENT] = cloneEvent(event);
+		const type = TYPE[this.type];
+		const context = {
+			$type: type,
+			$event:cloneEvent(event),
+			$context: this.context,
+			$data: this.#element.data()
+		};
 		if (this.preventDefault) event.preventDefault();
 		if (this.stopPropagation) event.stopPropagation();
 
-		const type = TYPE[this.type];
+		
 		if (type) {
 			type(this, context);
 		}
