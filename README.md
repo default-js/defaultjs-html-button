@@ -28,8 +28,8 @@ import { HTMLDefaultjsAnchorElement, HTMLDefaultjsButtonElement } from "@default
         <style>
             #target:not(.show) { display: none;}
         </style>        
-        <a is="d-button" type="toggle-class" class-value="show" selector="#target">toggle class "show" by link</a>
-        <button is="d-button" type="toggle-class" class-value="show" selector="#target">toggle class "show" by button</button>
+        <a is="d-action-button" type="toggle-class" class-value="show" selector="#target">toggle class "show" by link</a>
+        <button is="d-action-anchor" type="toggle-class" class-value="show" selector="#target">toggle class "show" by button</button>
         <div id="target">visible</div>
 
         //script file is located at dist directory
@@ -40,11 +40,11 @@ import { HTMLDefaultjsAnchorElement, HTMLDefaultjsButtonElement } from "@default
 
 ## How to use
 
-Define a `button` or `a` tag and use the `is` attribute with the value `d-button`. You must define the `type` attribute and choose between `delegate`, `toggle-class`, `toggle-attribute`, `call-renderer`, `render` to specify what kind of action would be executed.
+Define a `button` or `a` tag and use the `is` attribute with the value `d-action-button` or `d-action-anchor`. You must define the `type` attribute and choose between `delegate`, `toggle-class`, `toggle-attribute`, `call-renderer`, `render` to specify what kind of action would be executed.
 
 ```html
-    <a is="d-button" type="[delegate | toggle-class | toggle-attribute | call-renderer | render]">link</a>
-    <button is="d-button" type="[delegate | toggle-class | toggle-attribute | call-renderer | render]">button</button>
+    <a is="d-action-anchor" type="[delegate | toggle-class | toggle-attribute | call-renderer | render]">link</a>
+    <button is="d-action-button" type="[delegate | toggle-class | toggle-attribute | call-renderer | render]">button</button>
 ```
 
 For the correct execution it is necessary to define additional attributes depending on the type.

@@ -106,6 +106,10 @@ class ButtonLogic {
 		return this.#element.attr(key);
 	}
 
+	find(selector) {
+		return this.#element.find(selector);
+	}
+
 	get type() {
 		return this.attr(ATTR__TYPE);
 	}
@@ -150,7 +154,9 @@ class ButtonLogic {
 	get targets() {
 		const selector = this.selector;
 		if (selector && selector.length != 0) {
-			const targets = find(selector);
+			let targets = this.find(selector);
+			if (targets && targets.length != 0) return targets;
+			targets = find(selector);
 			if (targets && targets.length != 0) return targets;
 		}
 		return this.#element;

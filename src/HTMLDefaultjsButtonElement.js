@@ -1,9 +1,9 @@
-import {NODENAME} from "./Constants";
+import {NODENAME__BUTTON} from "./Constants";
 import {componentBaseOf, define} from "@default-js/defaultjs-html-components";
 import ButtonLogic, {ATTRIBUTES} from "./ButtonLogic";
 
 class HTMLDefaultjsButtonElement extends componentBaseOf(HTMLButtonElement){
-    static get NODENAME() { return NODENAME; }
+    static NODENAME = NODENAME__BUTTON;
 
     #logic;
     constructor(options){
